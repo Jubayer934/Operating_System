@@ -15,10 +15,10 @@ w for waiting
 
 int check_process(int a[],int r);
 void Waiting_time(int R[],int r, int b[], int w[]);
-void frame_count(int r, int a[], int n);
+void frame_count(int r, int a[], int n, int N[]);
 
 int main() {
-    int a[100];
+    int a[100],N[100];
     cout << "Give the frame size = ";
 
     int n;
@@ -48,7 +48,7 @@ int main() {
     while(true){
         int temp=check_process(a,r);
         if (temp==1)
-            frame_count(r, a, n);
+            frame_count(r, a, n, N);
         else
             break;
     }
@@ -56,8 +56,8 @@ int main() {
     for(int i=0;i<z;i++)
         cout<<"----------";
     cout<<endl<<frame[z];
-    for(int i=0;i<z;i++)
-        cout<<"|_"<<"P:"<<i+1<<"="<<frame[i]<<"_|";
+    for(int i=1;i<z;i++)
+        cout<<"|_"<<"P:"<<N[frame[i]]<<"="<<frame[i]<<"_|";
 
     printf("\n");
     for(int i=0;i<z;i++)
@@ -95,7 +95,7 @@ int check_process(int a[],int r)
     return 0;
 }
 
-void frame_count(int r, int a[], int n) {
+void frame_count(int r, int a[], int n, int N[]) {
 
     for (int i = 0; i < r; i++) {
         if (a[i] <= 0)
@@ -104,6 +104,7 @@ void frame_count(int r, int a[], int n) {
         { 
             k+=a[i];
             frame[z]=k;
+            N[frame[z]]=i+1;
             z++;
             a[i]=0;
         }
@@ -111,6 +112,7 @@ void frame_count(int r, int a[], int n) {
         {
             k+=n;
             frame[z]=k;
+            N[frame[z]]=i+1;
             z++;
             a[i]-=n;
         }
